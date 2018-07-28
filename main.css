@@ -1,0 +1,24 @@
+#body {
+    background-color: burlywood;
+}
+.note {
+    position: relative;
+    left: 10%;
+    width: 100px;
+    height: 75px;
+    background-color: rgb(212, 147, 100);
+    box-shadow: darkgray;
+    border-radius: 15px;
+}
+
+.note p1 {
+    background-color: transparent;
+    color: black;
+}
+
+.note button {
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    height: 100%;
+}
