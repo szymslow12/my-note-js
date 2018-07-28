@@ -1,6 +1,6 @@
 "use strict";
 //import {storage} from "./Storage.js";
-
+import {Note} from "./Note.js";
 
 let createNewNoteButton = () => {
     let div = document.createElement("div");
@@ -25,6 +25,14 @@ function onClick() {
 let createNoteContainer = () => {
     let container = document.createElement("div");
     container.setAttribute("class", "note-container");
-    //ToDo: fillContainerWithNotes(container);
+    fillContainerWithNotes(container);
     document.getElementById("body").appendChild(container);
 };
+
+function fillContainerWithNotes(container) {
+    let note = new Note("Title", "Note content");
+    container.appendChild(note.createHTMLNote());
+}
+
+createNewNoteButton();
+createNoteContainer();
