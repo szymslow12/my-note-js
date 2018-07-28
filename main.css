@@ -55,8 +55,27 @@
     text-align: center;
 }
 
-.note-title > p1 {
-    background-color: burlywood;
+.remove-button {
+    position: absolute;
+    margin-left: 5px;
+    width: 20px;
+    height: 20px;
+}
+
+.remove-sign {
+    font-family: 'Glyphicons Halflings';
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    height: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    display: block;
+}
+
+.remove-sign::before {
+    content:"\2716";
 }
 
 .note-title > p1:first-child {
@@ -66,6 +85,7 @@
 
 .note-title p1 {
     display: table-cell;
+    background-color: burlywood;
     color: black;
 }
 
