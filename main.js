@@ -30,7 +30,9 @@ let createNoteContainer = () => {
 };
 
 function fillContainerWithNotes(container) {
-    let note = new Note("Title", "Note content");
+    let note = new Note("Very long Title needed to check if everything works fine", "Note content");
+    container.appendChild(note.createHTMLNote());
+    note = new Note("Title", "Note content");
     container.appendChild(note.createHTMLNote());
 }
 
