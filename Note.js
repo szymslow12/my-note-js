@@ -1,6 +1,7 @@
 "use strict";
 
 import {NoteContent} from "./NoteContent.js";
+import {storage} from "./Storage.js";
 
 export class Note {
     constructor(title, content) {
@@ -14,6 +15,7 @@ export class Note {
         let noteContent = new NoteContent(this);
         let title = noteContent.getTitle();
         let content = noteContent.getNoteContent();
+        this.setEventListeners(title, content);
         note.appendChild(title);
         note.appendChild(content);
         return note;
@@ -22,5 +24,21 @@ export class Note {
     static createFromObject(object) {
         let note = new Note(object.title, object.content);
         return note;
+    }
+
+    setEventListeners(title, content) {
+        console.log(this.element);
+        title.addEventListener("input", this.listenToTitle.bind(this));
+        content.addEventListener("input", this.listenToContent.bind(this));
+    }
+
+    listenToTitle(title) {
+        this.title = title.target.innerText;
+        storage.save()
+    }
+
+    listenToContent(content) {
+        this.content = content.target.value;
+        storage.save();
     }
 }
