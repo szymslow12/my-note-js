@@ -11,7 +11,7 @@ export class Note {
     createHTMLNote() {
         let note = document.createElement("div");
         note.setAttribute("class", "note");
-        let noteContent = new NoteContent(this.title, this.content);
+        let noteContent = new NoteContent(this);
         let title = noteContent.getTitle();
         let content = noteContent.getNoteContent();
         note.appendChild(title);
