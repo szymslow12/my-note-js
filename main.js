@@ -1,6 +1,14 @@
 "use strict";
 //import {storage} from "./Storage.js";
 
+
+let createNewNoteButton = () => {
+    let div = document.createElement("div");
+    div.setAttribute("class", "note");
+    document.getElementById("body").appendChild(div);
+    getButton();
+}
+
 let getButton = () => {
     let button = document.createElement("button");
     button.setAttribute("onclick", "onClick()");
