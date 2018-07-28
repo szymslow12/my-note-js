@@ -1,5 +1,5 @@
 "use strict";
-//import {storage} from "./Storage.js";
+import {storage} from "./Storage.js";
 import {Note} from "./Note.js";
 
 let createNewNoteButton = () => {
@@ -11,7 +11,7 @@ let createNewNoteButton = () => {
 
 let getButton = () => {
     let button = document.createElement("button");
-    button.setAttribute("onclick", "onClick()");
+    button.addEventListener("click", onClick)
     let date = document.createElement("p1");
     date.innerText = "New note";
     button.appendChild(date);
@@ -19,22 +19,31 @@ let getButton = () => {
 };
 
 function onClick() {
-    console.log("clicked");
+    let note = new Note("New note!", "New note content!!");
+    let noteContainer = document.getElementById("container");
+    noteContainer.appendChild(note.createHTMLNote());
+    storage.add(note);
 }
 
 let createNoteContainer = () => {
     let container = document.createElement("div");
+    container.setAttribute("id", "container");
     container.setAttribute("class", "note-container");
     fillContainerWithNotes(container);
     document.getElementById("body").appendChild(container);
 };
 
 function fillContainerWithNotes(container) {
-    let note = new Note("Very long Title needed to check if everything works fine", "Note content");
-    container.appendChild(note.createHTMLNote());
-    note = new Note("Title", "Note content");
-    container.appendChild(note.createHTMLNote());
+    for (let note of storage.notes) {
+        container.appendChild(note.createHTMLNote());
+    }
 }
 
+function clearLocalStorageNotes() {
+    for (let note of storage.notes) {
+        storage.remove(note);
+    }
+}
+//clearLocalStorageNotes();
 createNewNoteButton();
 createNoteContainer();
