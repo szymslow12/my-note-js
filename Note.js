@@ -27,7 +27,6 @@ export class Note {
     }
 
     setEventListeners(title, content) {
-        console.log(this.element);
         title.addEventListener("input", this.listenToTitle.bind(this));
         content.addEventListener("input", this.listenToContent.bind(this));
     }
