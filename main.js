@@ -2,6 +2,7 @@
 import {storage} from "./Storage.js";
 import {Note} from "./Note.js";
 import {ButtonController} from "./ButtonController.js";
+import { NoteContent } from "./NoteContent.js";
 
 let createNoteContainer = () => {
     let container = document.createElement("div");
@@ -13,7 +14,7 @@ let createNoteContainer = () => {
 
 function fillContainerWithNotes(container) {
     for (let note of storage.notes) {
-        container.appendChild(note.createHTMLNote());
+        container.appendChild(note.createHTMLNote(new NoteContent(note)));
     }
 }
 
@@ -26,10 +27,10 @@ function clearLocalStorageNotes() {
 function createNewNote() {
     let note = new Note("New note!", "New note content!!");
     let noteContainer = document.getElementById("container");
-    noteContainer.appendChild(note.createHTMLNote());
+    noteContainer.appendChild(note.createHTMLNote(new NoteContent(note)));
     storage.add(note);
 }
 
-clearLocalStorageNotes();
+//clearLocalStorageNotes();
 new ButtonController().createNewNoteButton(createNewNote);
 createNoteContainer();
