@@ -5,25 +5,28 @@ import {storage} from "./Storage.js";
 
 export class Note {
     constructor(title, content) {
-        this.title = title;
-        this.content = content;
+        this.noteTitle = title;
+        this.noteDescription = content;
     }
 
-    createHTMLNote() {
+    createHTMLNote(noteContent) {
         let note = document.createElement("div");
-        note.setAttribute("class", "note");
-        let noteContent = new NoteContent(this);
         let title = noteContent.getTitle();
         let content = noteContent.getNoteContent();
         this.setEventListeners(title, content);
-        note.appendChild(title);
-        note.appendChild(content);
+        this.setNoteView(note, title, content);
         return note;
     }
 
     static createFromObject(object) {
-        let note = new Note(object.title, object.content);
+        let note = new Note(object.noteTitle, object.noteDescription);
         return note;
+    }
+
+    setNoteView(note, title, content) {
+        note.setAttribute("class", "note");
+        note.appendChild(title);
+        note.appendChild(content);
     }
 
     setEventListeners(title, content) {
@@ -32,12 +35,12 @@ export class Note {
     }
 
     listenToTitle(title) {
-        this.title = title.target.innerText;
+        this.noteTitle = title.target.innerText;
         storage.save()
     }
 
     listenToContent(content) {
-        this.content = content.target.value;
+        this.noteDescription = content.target.value;
         storage.save();
     }
 }
