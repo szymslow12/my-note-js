@@ -1,5 +1,6 @@
 "use strict";
 import {Note} from "./Note.js";
+import {NoteContent} from "./NoteContent.js";
 
 export class ButtonController {
     constructor() {
@@ -19,5 +20,15 @@ export class ButtonController {
         date.innerText = "New note";
         button.appendChild(date);
         document.getElementsByClassName("new-note").item(0).appendChild(button);
+    }
+
+    getRemoveButton() {
+        let div = document.createElement("div");
+        let button = document.createElement("button");
+        let span = document.createElement("span");
+        span.setAttribute("class", "remove-sign");
+        button.setAttribute("class", "remove-button");
+        button.appendChild(span);
+        return button;
     }
 }
