@@ -1,5 +1,6 @@
 "use strict";
 import {storage} from "./Storage.js";
+import { ButtonController } from "./ButtonController.js";
 
 export class NoteContent {
     constructor(note) {
@@ -13,8 +14,10 @@ export class NoteContent {
         this.title.setAttribute("class", "note-title");
         let titleContent = document.createElement("p1");
         titleContent.setAttribute("contenteditable", "true");
-        titleContent.textContent = this.note.title;
-        titleContent.appendChild(this.getRemoveButton());
+        titleContent.textContent = this.note.noteTitle;
+        let removeButton = new ButtonController().getRemoveButton();
+        removeButton.addEventListener("click", this.removeNote.bind(this));
+        titleContent.appendChild(removeButton);
         this.title.appendChild(titleContent);
     }
 
@@ -22,19 +25,8 @@ export class NoteContent {
         this.content = document.createElement("div");
         this.content.setAttribute("class", "note-content");
         let noteContent = document.createElement("textarea");
-        noteContent.textContent = this.note.content;
+        noteContent.textContent = this.note.noteDescription;
         this.content.appendChild(noteContent);
-    }
-
-    getRemoveButton() {
-        let div = document.createElement("div");
-        let button = document.createElement("button");
-        let span = document.createElement("span");
-        span.setAttribute("class", "remove-sign");
-        button.setAttribute("class", "remove-button");
-        button.appendChild(span);
-        button.addEventListener("click", this.removeNote.bind(this));
-        return button;
     }
 
     removeNote(actualButton) {
