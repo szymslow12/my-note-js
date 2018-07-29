@@ -18,14 +18,16 @@ class Storage {
     }
 
     save(){
-        localStorage.setItem('notes', JSON.stringify([...this.notes]))
+        localStorage.setItem('notes', JSON.stringify([...this.notes]));
     }
 
     load(){
         let notes = JSON.parse(localStorage.getItem('notes'));
         if(notes !== null){
             for(let note of notes){
-                this.notes.add(Note.createFromObject(note));
+                if (note) { 
+                    this.notes.add(Note.createFromObject(note));
+                }
             }
         }
     }
