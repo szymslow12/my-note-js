@@ -4,31 +4,29 @@ import {storage} from "./Storage.js";
 export class NoteContent {
     constructor(note) {
         this.note = note;
-        this.title = this.createTitle(note);
-        this.noteContent = this.createNoteContent(note.content);
+        this.createTitle();
+        this.createNoteContent();
     }
 
-    createTitle(note) {
-        let title = document.createElement("div");
-        title.setAttribute("class", "note-title");
+    createTitle() {
+        this.title = document.createElement("div");
+        this.title.setAttribute("class", "note-title");
         let titleContent = document.createElement("p1");
         titleContent.setAttribute("contenteditable", "true");
-        titleContent.textContent = note.title;
-        titleContent.appendChild(this.getRemoveButton(note));
-        title.appendChild(titleContent);
-        return title;
+        titleContent.textContent = this.note.title;
+        titleContent.appendChild(this.getRemoveButton());
+        this.title.appendChild(titleContent);
     }
 
-    createNoteContent(contentValue) {
-        let content = document.createElement("div");
-        content.setAttribute("class", "note-content");
+    createNoteContent() {
+        this.content = document.createElement("div");
+        this.content.setAttribute("class", "note-content");
         let noteContent = document.createElement("textarea");
-        noteContent.textContent = contentValue;
-        content.appendChild(noteContent);
-        return content;
+        noteContent.textContent = this.note.content;
+        this.content.appendChild(noteContent);
     }
 
-    getRemoveButton(note) {
+    getRemoveButton() {
         let div = document.createElement("div");
         let button = document.createElement("button");
         let span = document.createElement("span");
@@ -49,6 +47,6 @@ export class NoteContent {
     }
 
     getNoteContent() {
-        return this.noteContent;
+        return this.content;
     }
 }
